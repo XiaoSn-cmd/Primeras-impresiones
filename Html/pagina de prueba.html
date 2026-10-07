@@ -1,0 +1,752 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Yudaes Regalitos y antojitos | Repostería & Postres</title>
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+  
+  <style>
+    /* ==========================================
+       1. VARIABLES Y PALETA DE COLORES PASTEL
+       ========================================== */
+    :root {
+      --bg-pastel: #FFD1DC;          /* Rosa pastel */
+      --bg-card: #FFFFFF;            /* Blanco puro para tarjetas */
+      --primary-pink: #F8A5C2;       /* Rosado pastel principal */
+      --primary-hover: #F78FB3;      /* Rosado más intenso para interacciones */
+      --accent-soft: #FDE2E4;        /* Rosado muy claro para destacados */
+      --text-color: #574B40;         /* Café cocoa suave */
+      --text-muted: #8C7B70;         /* Café claro para subtítulos */
+      --gold: #D4AF37;               /* Dorado elegante */
+      --shadow-soft: 0 10px 25px rgba(248, 165, 194, 0.2);
+      --transition-fast: 0.3s ease;
+      --transition-smooth: 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: var(--bg-pastel);
+      color: var(--text-color);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+      font-family: 'Dancing Script', cursive;
+    }
+
+    /* ==========================================
+       2. NAVEGACIÓN Y CABECERA
+       ========================================== */
+    .header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      background-color: rgba(255, 255, 255, 0.9);
+      backdrop-filter: blur(10px);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.2rem 8%;
+      box-shadow: 0 2px 15px rgba(0,0,0,0.03);
+      z-index: 1000;
+      transition: var(--transition-fast);
+    }
+
+    .logo {
+      font-family: 'Dancing Script', cursive;
+      font-size: 2.2rem;
+      color: var(--gold);
+      text-decoration: none;
+      font-weight: 700;
+    }
+
+    .nav-links {
+      display: flex;
+      list-style: none;
+      gap: 2rem;
+      align-items: center;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: var(--text-color);
+      font-weight: 500;
+      transition: var(--transition-fast);
+    }
+
+    .nav-links a:hover {
+      color: var(--primary-pink);
+    }
+
+    .cart-btn {
+      background-color: var(--accent-soft);
+      border: none;
+      padding: 0.6rem 1.2rem;
+      border-radius: 20px;
+      color: var(--text-color);
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: var(--transition-fast);
+    }
+
+    .cart-btn:hover {
+      background-color: var(--primary-pink);
+      color: #FFF;
+      transform: translateY(-2px);
+    }
+
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+    }
+
+    .hamburger span {
+      width: 25px;
+      height: 3px;
+      background-color: var(--text-color);
+      border-radius: 3px;
+      transition: var(--transition-fast);
+    }
+
+    /* ==========================================
+       3. SECCIÓN HERO (PORTADA)
+       ========================================== */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 8rem 8% 4rem;
+      gap: 2rem;
+    }
+
+    .hero-text { flex: 1; }
+
+    .hero-text h1 {
+      font-size: 4rem;
+      color: var(--primary-pink);
+      line-height: 1.1;
+      margin-bottom: 1rem;
+    }
+
+    .hero-text p {
+      font-size: 1.1rem;
+      color: var(--text-muted);
+      margin-bottom: 2rem;
+      max-width: 500px;
+    }
+
+    .btn-primary {
+      display: inline-block;
+      padding: 0.9rem 2.2rem;
+      background-color: var(--primary-pink);
+      color: white;
+      text-decoration: none;
+      border-radius: 30px;
+      font-weight: 600;
+      box-shadow: var(--shadow-soft);
+      transition: var(--transition-fast);
+    }
+
+    .btn-primary:hover {
+      background-color: var(--primary-hover);
+      transform: translateY(-3px);
+      box-shadow: 0 15px 30px rgba(248, 165, 194, 0.4);
+    }
+
+    .hero-image {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      position: relative;
+    }
+
+    .hero-image img {
+      width: 100%;
+      max-width: 420px;
+      border-radius: 30px;
+      box-shadow: var(--shadow-soft);
+      animation: float 4s ease-in-out infinite;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-15px); }
+    }
+
+    /* ==========================================
+       4. SECCIÓN CATÁLOGO (ACTUALIZADA)
+       ========================================== */
+    .menu-section {
+      padding: 6rem 8%;
+    }
+
+    .section-title {
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+
+    .section-title h2 {
+      font-size: 3rem;
+      color: var(--text-color);
+    }
+
+    .section-title p {
+      color: var(--text-muted);
+    }
+
+    .filter-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      margin-bottom: 3rem;
+      flex-wrap: wrap;
+    }
+
+    .filter-btn {
+      background: white;
+      border: 1px solid var(--accent-soft);
+      padding: 0.6rem 1.5rem;
+      border-radius: 20px;
+      cursor: pointer;
+      color: var(--text-color);
+      font-weight: 500;
+      transition: var(--transition-fast);
+    }
+
+    .filter-btn.active, .filter-btn:hover {
+      background-color: var(--primary-pink);
+      color: white;
+      border-color: var(--primary-pink);
+    }
+
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2.5rem;
+    }
+
+    .product-card {
+      background-color: var(--bg-card);
+      border-radius: 20px;
+      padding: 1.5rem;
+      text-align: center;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.02);
+      transition: var(--transition-fast);
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .product-card:hover {
+      transform: translateY(-8px);
+      box-shadow: var(--shadow-soft);
+    }
+
+    /* Etiqueta de productos (Novedad, Más Vendido) */
+    .product-badge {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      background-color: var(--gold);
+      color: white;
+      padding: 0.3rem 0.8rem;
+      border-radius: 20px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      z-index: 2;
+      box-shadow: 0 4px 10px rgba(212, 175, 55, 0.3);
+    }
+
+    .product-card img {
+      width: 100%;
+      height: 220px;
+      object-fit: cover;
+      border-radius: 15px;
+      margin-bottom: 1.2rem;
+    }
+
+    .product-card h3 {
+      font-size: 1.8rem;
+      margin-bottom: 0.5rem;
+      color: var(--text-color);
+    }
+    
+    .product-card .desc {
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      margin-bottom: 1.5rem;
+      /* Min height asegura que los botones queden alineados */
+      min-height: 65px; 
+    }
+
+    .card-footer {
+      margin-top: auto;
+    }
+
+    .product-card .price {
+      color: var(--primary-pink);
+      font-weight: 700;
+      font-size: 1.4rem;
+      margin-bottom: 1rem;
+    }
+
+    .add-to-cart {
+      background-color: var(--accent-soft);
+      border: none;
+      width: 100%;
+      padding: 0.8rem;
+      border-radius: 12px;
+      color: var(--text-color);
+      font-weight: 600;
+      cursor: pointer;
+      transition: var(--transition-fast);
+    }
+
+    .add-to-cart:hover {
+      background-color: var(--primary-pink);
+      color: white;
+    }
+
+    /* ==========================================
+       5. SECCIÓN NOSOTROS
+       ========================================== */
+    .about-section {
+      background-color: var(--accent-soft);
+      padding: 6rem 8%;
+    }
+
+    .about-container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 4rem;
+      background: var(--bg-card);
+      border-radius: 30px;
+      padding: 3rem;
+      box-shadow: var(--shadow-soft);
+    }
+
+    .about-text { flex: 1; }
+
+    .about-text h2 {
+      font-size: 3rem;
+      color: var(--primary-pink);
+      margin-bottom: 1.5rem;
+    }
+
+    .about-text p {
+      margin-bottom: 1rem;
+      font-size: 1.05rem;
+    }
+
+    .social-links {
+      margin-top: 2rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--accent-soft);
+    }
+
+    .social-links p {
+      font-weight: 600;
+      color: var(--text-color);
+      margin-bottom: 1rem;
+    }
+
+    .social-links .icons {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .social-btn {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.6rem 1.2rem;
+      border-radius: 20px;
+      text-decoration: none;
+      font-weight: 500;
+      color: white;
+      transition: var(--transition-fast);
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+
+    .social-btn.instagram {
+      background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+    }
+
+    .social-btn.tiktok {
+      background: #000000;
+    }
+
+    .social-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 6px 15px rgba(0,0,0,0.2);
+    }
+
+    .about-image {
+      flex: 1;
+      max-width: 450px;
+    }
+
+    .about-image img {
+      width: 100%;
+      border-radius: 20px;
+      box-shadow: var(--shadow-soft);
+      transform: rotate(2deg);
+      transition: var(--transition-smooth);
+    }
+
+    .about-image img:hover {
+      transform: rotate(0deg) scale(1.02);
+    }
+
+    /* ==========================================
+       6. TRANSICIONES DE SCROLL (REVEAL)
+       ========================================== */
+    .reveal {
+      opacity: 0;
+      transform: translateY(40px);
+      transition: var(--transition-smooth);
+    }
+
+    .reveal.active {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ==========================================
+       7. PIE DE PÁGINA
+       ========================================== */
+    footer {
+      background-color: var(--bg-pastel);
+      padding: 3rem 8%;
+      text-align: center;
+      border-top: 1px solid #f3b6c6;
+      color: var(--text-muted);
+    }
+
+    /* ==========================================
+       8. ADAPTACIÓN PARA MÓVILES
+       ========================================== */
+    @media (max-width: 768px) {
+      .hamburger { display: flex; }
+
+      .nav-links {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background-color: rgba(255, 255, 255, 0.98);
+        flex-direction: column;
+        padding: 2rem 0;
+        gap: 1.5rem;
+        box-shadow: 0 10px 15px rgba(0,0,0,0.05);
+        clip-path: circle(0% at 100% 0);
+        transition: clip-path 0.5s ease-in-out;
+      }
+
+      .nav-links.open {
+        clip-path: circle(140% at 100% 0);
+      }
+
+      .hero {
+        flex-direction: column;
+        text-align: center;
+        padding-top: 7rem;
+      }
+
+      .hero-text h1 { font-size: 3rem; }
+      .hero-text p { margin: 0 auto 2rem; }
+      .about-container { flex-direction: column; padding: 2rem; }
+      .about-image { margin-top: 2rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAVEGACIÓN -->
+  <header class="header">
+    <a href="#" class="logo">Yudaes Regalitos</a>
+    
+    <div class="hamburger" id="hamburger">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#inicio">Inicio</a></li>
+      <li><a href="#menu">Catálogo</a></li>
+      <li><a href="#nosotros">Nosotros</a></li>
+      <li>
+        <button class="cart-btn">
+          🛒 Carrito (<span id="cartCount">0</span>)
+        </button>
+      </li>
+    </ul>
+  </header>
+
+  <!-- HERO SECTION -->
+  <section class="hero" id="inicio">
+    <div class="hero-text reveal">
+      <h1>Momentos dulces, hechos con amor</h1>
+      <p>Postres artesanales horneados diariamente con los mejores ingredientes. El toque perfecto de dulzura para tu día.</p>
+      <a href="#menu" class="btn-primary">Ver Menú</a>
+    </div>
+    <div class="hero-image reveal">
+      <img src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&w=600&q=80" alt="Pastel de Chocolate">
+    </div>
+  </section>
+
+  <!-- CATÁLOGO DE POSTRES DETALLADO -->
+  <section class="menu-section" id="menu">
+    <div class="section-title reveal">
+      <h2>Catálogo Completo</h2>
+      <p>Explora nuestras creaciones detalladas hechas especialmente para ti</p>
+    </div>
+
+    <!-- Filtros interactivos -->
+    <div class="filter-buttons reveal">
+      <button class="filter-btn active" data-filter="all">Todos</button>
+      <button class="filter-btn" data-filter="arreglos">Arreglos</button>
+      <button class="filter-btn" data-filter="tortas">Tortas</button>
+      <button class="filter-btn" data-filter="marquesas">Marquesas</button>
+      <button class="filter-btn" data-filter="especiales">Especiales</button>
+    </div>
+
+    <!-- Grilla de productos ampliada -->
+    <div class="product-grid">
+      
+      <!-- Producto 1 -->
+      <div class="product-card reveal" data-category="arreglos">
+        <span class="product-badge" style="background-color: var(--primary-pink);">Personalizable</span>
+        <img src="https://images.unsplash.com/photo-1530103862676-de8892bf309c?auto=format&fit=crop&w=500&q=80" alt="Arreglo de Globos">
+        <h3>Arreglo de Globos</h3>
+        <p class="desc">Burbuja transparente personalizada, decorada con cintas y acompañada de una base llena de tus chocolates favoritos.</p>
+        <div class="card-footer">
+          <p class="price">$25.00</p>
+          <button class="add-to-cart">Añadir al Carrito</button>
+        </div>
+      </div>
+
+      <!-- Producto 2 -->
+      <div class="product-card reveal" data-category="tortas">
+        <span class="product-badge">Más Vendido</span>
+        <img src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&w=500&q=80" alt="Torta de Chocolate">
+        <h3>Torta de Chocolate</h3>
+        <p class="desc">Doble capa de bizcocho húmedo, rellena y cubierta generosamente con nuestro fudge de chocolate artesanal.</p>
+        <div class="card-footer">
+          <p class="price">$20.00</p>
+          <button class="add-to-cart">Añadir al Carrito</button>
+        </div>
+      </div>
+
+      <!-- Producto 3 -->
+      <div class="product-card reveal" data-category="tortas">
+        <img src="https://images.unsplash.com/photo-1464349095431-e9a21285b5f3?auto=format&fit=crop&w=500&q=80" alt="Torta 3 Leches">
+        <h3>Torta 3 Leches</h3>
+        <p class="desc">El clásico postre tradicional súper jugoso, coronado con merengue suizo tostado y un ligero toque de canela.</p>
+        <div class="card-footer">
+          <p class="price">$18.00</p>
+          <button class="add-to-cart">Añadir al Carrito</button>
+        </div>
+      </div>
+
+      <!-- Producto 4 -->
+      <div class="product-card reveal" data-category="especiales">
+        <span class="product-badge" style="background-color: var(--primary-pink);">Ideal Regalo</span>
+        <img src="https://images.unsplash.com/photo-1550258987-190a2d41a8ba?auto=format&fit=crop&w=500&q=80" alt="Caja de Fresas">
+        <h3>Caja de Fresas</h3>
+        <p class="desc">Docena de fresas frescas y seleccionadas, bañadas en chocolate premium con detalles y chispas doradas.</p>
+        <div class="card-footer">
+          <p class="price">$15.00</p>
+          <button class="add-to-cart">Añadir al Carrito</button>
+        </div>
+      </div>
+
+      <!-- Producto 5 -->
+      <div class="product-card reveal" data-category="marquesas">
+        <img src="https://images.unsplash.com/photo-1551024601-bec78aea704b?auto=format&fit=crop&w=500&q=80" alt="Marquesa de Limón">
+        <h3>Marquesa de Limón</h3>
+        <p class="desc">Capas de galleta dulce intercaladas con nuestra suave, cremosa y refrescante crema cítrica de limón.</p>
+        <div class="card-footer">
+          <p class="price">$5.00</p>
+          <button class="add-to-cart">Añadir al Carrito</button>
+        </div>
+      </div>
+
+      <!-- Producto 6 -->
+      <div class="product-card reveal" data-category="arreglos">
+        <img src="https://images.unsplash.com/photo-1549465220-1a8b9238cd48?auto=format&fit=crop&w=500&q=80" alt="Caja Sorpresa">
+        <h3>Arreglo Sorpresa</h3>
+        <p class="desc">Hermosa caja decorada que incluye un mini peluche, mix de galletas, jugo y un topper de felicitaciones.</p>
+        <div class="card-footer">
+          <p class="price">$30.00</p>
+          <button class="add-to-cart">Añadir al Carrito</button>
+        </div>
+      </div>
+
+      <!-- Producto 7 -->
+      <div class="product-card reveal" data-category="tortas">
+        <span class="product-badge">Nuevo</span>
+        <img src="https://images.unsplash.com/photo-1616541823729-00fe0aacd32c?auto=format&fit=crop&w=500&q=80" alt="Torta Red Velvet">
+        <h3>Torta Red Velvet</h3>
+        <p class="desc">Esponjosa y vibrante torta roja aterciopelada, cubierta con nuestro exclusivo y suave frosting de queso crema.</p>
+        <div class="card-footer">
+          <p class="price">$22.00</p>
+          <button class="add-to-cart">Añadir al Carrito</button>
+        </div>
+      </div>
+
+      <!-- Producto 8 -->
+      <div class="product-card reveal" data-category="marquesas">
+        <img src="https://images.unsplash.com/photo-1605807646983-377bc5a76493?auto=format&fit=crop&w=500&q=80" alt="Marquesa de Chocolate">
+        <h3>Marquesa de Choco</h3>
+        <p class="desc">La favorita de la casa. Puro chocolate en cada capa, combinada con galletas y lluvia de chocolate encima.</p>
+        <div class="card-footer">
+          <p class="price">$5.00</p>
+          <button class="add-to-cart">Añadir al Carrito</button>
+        </div>
+      </div>
+
+      <!-- Producto 9 -->
+      <div class="product-card reveal" data-category="especiales">
+        <img src="https://images.unsplash.com/photo-1606890737304-57a1ca8a5b62?auto=format&fit=crop&w=500&q=80" alt="Mini Brownies">
+        <h3>Mini Brownies</h3>
+        <p class="desc">Cajita de 6 mini brownies melcochudos con corteza crujiente. Decorados con toppings surtidos a tu elección.</p>
+        <div class="card-footer">
+          <p class="price">$8.00</p>
+          <button class="add-to-cart">Añadir al Carrito</button>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- SECCIÓN NOSOTROS -->
+  <section class="about-section" id="nosotros">
+    <div class="about-container reveal">
+      <div class="about-text">
+        <h2>Conoce a Yudaes</h2>
+        <p>Somos una mini empresa apasionada por endulzar tus momentos especiales. Nos enorgullece decir que <strong>manufacturamos nuestros propios productos</strong>, garantizando frescura y sabor de hogar en cada bocado.</p>
+        <p>Además de la repostería, nos especializamos en crear <strong>arreglos a detalle</strong>. Trabajamos de la mano con nuestros clientes para personalizar cada entrega exactamente como la desean, haciendo de cada regalo una experiencia única e inolvidable.</p>
+        
+        <div class="social-links">
+          <p>¡Síguenos y descubre más de nuestro trabajo!</p>
+          <div class="icons">
+            <a href="https://www.instagram.com/yudaes_regalitos/" target="_blank" class="social-btn instagram" aria-label="Instagram">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+              Instagram
+            </a>
+            <a href="https://www.tiktok.com/@yudaesregalitos" target="_blank" class="social-btn tiktok" aria-label="TikTok">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"></path></svg>
+              TikTok
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="about-image">
+        <img src="imagenes/logo.png" alt="Creando postres artesanales Yudaes">
+      </div>
+    </div>
+  </section>
+
+  <!-- PIE DE PÁGINA -->
+  <footer>
+    <p>&copy; 2026 Yudaes Regalitos y antojitos - Todos los derechos reservados.</p>
+  </footer>
+
+  <!-- ==========================================
+       JAVASCRIPT (INTERACTIVIDAD Y ANIMACIONES)
+       ========================================== -->
+  <script>
+    const hamburger = document.getElementById('hamburger');
+    const navLinks = document.getElementById('navLinks');
+
+    hamburger.addEventListener('click', () => {
+      navLinks.classList.toggle('open');
+    });
+
+    document.querySelectorAll('.nav-links a').forEach(link => {
+      link.addEventListener('click', () => {
+        navLinks.classList.remove('open');
+      });
+    });
+
+    const revealElements = document.querySelectorAll('.reveal');
+    const revealOnScroll = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('active');
+        }
+      });
+    }, { threshold: 0.15 });
+
+    revealElements.forEach(el => revealOnScroll.observe(el));
+
+    const filterButtons = document.querySelectorAll('.filter-btn');
+    const productCards = document.querySelectorAll('.product-card');
+
+    filterButtons.forEach(button => {
+      button.addEventListener('click', () => {
+        filterButtons.forEach(btn => btn.classList.remove('active'));
+        button.classList.add('active');
+
+        const filterValue = button.getAttribute('data-filter');
+
+        productCards.forEach(card => {
+          if (filterValue === 'all' || card.getAttribute('data-category') === filterValue) {
+            card.style.display = 'flex';
+            setTimeout(() => { card.style.opacity = '1'; card.style.transform = 'scale(1)'; }, 50);
+          } else {
+            card.style.opacity = '0';
+            card.style.transform = 'scale(0.8)';
+            setTimeout(() => { card.style.display = 'none'; }, 300);
+          }
+        });
+      });
+    });
+
+    let count = 0;
+    const cartCountElement = document.getElementById('cartCount');
+    const addCartButtons = document.querySelectorAll('.add-to-cart');
+
+    addCartButtons.forEach(button => {
+      button.addEventListener('click', () => {
+        count++;
+        cartCountElement.textContent = count;
+        
+        button.textContent = '¡Añadido!';
+        button.style.backgroundColor = 'var(--primary-pink)';
+        button.style.color = '#FFF';
+        
+        setTimeout(() => {
+          button.textContent = 'Añadir al Carrito';
+          button.style.backgroundColor = 'var(--accent-soft)';
+          button.style.color = 'var(--text-color)';
+        }, 1200);
+      });
+    });
+  </script>
+</body>
+</html>
